@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://djv0r7ukvu78v"]
+
+[ext_resource type="Script" uid="uid://b2qq5a3o40nhf" path="res://scripts/player/basic_player_body.gd" id="1_tyffc"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ns6u7"]
+
+[sub_resource type="Skin" id="Skin_tyffc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tyffc"]
+albedo_color = Color(0.12279231, 0.51714253, 0.18107012, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5t4e2"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_xvgsr"]
+size = Vector2(32, 32)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_tyffc"]
+points = PackedVector3Array(-16, 0, -16, -16, 0, 16, 16, 0, -16, 16, 0, 16)
+
+[sub_resource type="Environment" id="Environment_tyffc"]
+ambient_light_source = 2
+ambient_light_color = Color(0.86898494, 0.8689849, 0.8689849, 1)
+ambient_light_energy = 8.85
+
+[node name="Node3D" type="Node3D" unique_id=1083333173]
+
+[node name="BasicPlayerBody" type="CharacterBody3D" parent="." unique_id=1310412544]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1054283, 0)
+script = ExtResource("1_tyffc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BasicPlayerBody" unique_id=558627592]
+mesh = SubResource("CapsuleMesh_ns6u7")
+skin = SubResource("Skin_tyffc")
+surface_material_override/0 = SubResource("StandardMaterial3D_tyffc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BasicPlayerBody" unique_id=1448839625]
+shape = SubResource("CapsuleShape3D_5t4e2")
+
+[node name="Camera3D" type="Camera3D" parent="BasicPlayerBody" unique_id=354229201]
+transform = Transform3D(1, 0, 0, 0, 0.9781476, 0.2079117, 0, -0.2079117, 0.9781476, 0, 4.243, 9.204)
+fov = 45.1
+size = 2.9
+
+[node name="LightmapGI" type="LightmapGI" parent="." unique_id=498398422]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1950111977]
+
+[node name="BasicFloorPlaneMesh" type="MeshInstance3D" parent="StaticBody3D" unique_id=1385284612]
+mesh = SubResource("PlaneMesh_xvgsr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=590188527]
+shape = SubResource("ConvexPolygonShape3D_tyffc")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1955970807]
+environment = SubResource("Environment_tyffc")
