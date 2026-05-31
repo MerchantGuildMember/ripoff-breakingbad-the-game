@@ -8,19 +8,19 @@ public partial class CameraController : Camera3D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		_player = GetNode<CharacterBody3D>("/root/Node3D/BasicPlayerBody");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		// get player positions
-		_player = GetNode<CharacterBody3D>("BasicPlayerBody");
 		
 		// set camera position to match X and Z only
+		var CurrentPosition = GlobalPosition;
+		CurrentPosition.X = _player.GlobalPosition.X;
+		CurrentPosition.Z = _player.GlobalPosition.Z;
 		
-		
-		
-		// leave y and rotation alone
+		GlobalPosition = CurrentPosition;
 		
 	}
 }
