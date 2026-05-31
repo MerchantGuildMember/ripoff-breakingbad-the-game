@@ -17,13 +17,13 @@ public partial class BasicPlayerBody : CharacterBody3D
 		}
 
 		// Handle Jump.
-		if (Input.IsActionPressed("jump") && !IsOnFloor())
+		if (Input.IsActionPressed("jump") && IsOnFloor())
 		{
 			velocity.Y = JumpVelocity;
 		}
 
 		// Get the input direction and handle the movement/deceleration.
-		// As good practice, you should replace UI actions with custom gameplay actions.
+		// As good practice, you should replace UI actions with custom gameplay actions. -- Already done
 		Vector2 inputDir = Input.GetVector("move_left", "move_right", "move_up", "move_down");
 		Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
 		if (direction != Vector3.Zero)
