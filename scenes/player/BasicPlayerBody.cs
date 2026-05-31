@@ -5,7 +5,11 @@ public partial class BasicPlayerBody : CharacterBody3D
 {
 	public const float Speed = 5.0f;
 	public const float JumpVelocity = 4.5f;
+	
+	private Camera3D _camera;
+	private const int RayLength = 200;
 
+	// runs every frame
 	public override void _PhysicsProcess(double delta)
 	{
 		Vector3 velocity = Velocity;
@@ -39,5 +43,33 @@ public partial class BasicPlayerBody : CharacterBody3D
 
 		Velocity = velocity;
 		MoveAndSlide();
+		
+		// Handle rotation
+		if (Input.IsActionPressed("aim"))
+		{
+			HandleRotation();
+		}
+	}
+
+	public override void _Ready() // Basically like a constructor for nodes when they first enter the scene before anything else happens
+	{
+		_camera = GetNode<Camera3D>("/root/Node3D/Camera3D");
+	}
+
+	private void HandleRotation()
+	{
+		var from = _camera.ProjectRayOrigin(GetViewport().GetMousePosition());
+		var normal = _camera.ProjectRayNormal(GetViewport().GetMousePosition());
+		
+		var t = -from.Y /  normal.Y;
+		Vector3 groundPoint = from + normal * t;
+		
+		LookAt(groundPoint, Vector3.Up);
+		
+		// Vector3 worldPosMousePos = new Vector3(mousePos.X, mousePos.Y, 0);
+		// double angleRadians = Math.Atan2(worldPosMousePos.X, worldPosMousePos.Y);
+		// 	
+		// BasicPlayerBody
+			
 	}
 }
