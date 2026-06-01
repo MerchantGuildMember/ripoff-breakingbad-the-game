@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dakr40orowuye"]
+
+[sub_resource type="Environment" id="Environment_tyffc"]
+ambient_light_source = 2
+ambient_light_color = Color(0.86898494, 0.8689849, 0.8689849, 1)
+ambient_light_energy = 8.85
+
+[node name="WorldEnvironment" type="WorldEnvironment" unique_id=428466636]
+environment = SubResource("Environment_tyffc")

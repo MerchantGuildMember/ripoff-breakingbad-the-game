@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://bdt11dk3xsyv2"]
+
+[ext_resource type="Script" uid="uid://dpr4bwui558du" path="res://scenes/world/CameraController.cs" id="1_rcd4o"]
+
+[node name="main_player_cam" type="Node" unique_id=361277924]
+
+[node name="CameraPivot" type="Marker3D" parent="." unique_id=1734762595]
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot" unique_id=997613233]
+transform = Transform3D(0.8592517, -0.23619127, 0.4537623, -0.0071674073, 0.8813832, 0.47234774, -0.5115028, -0.4091179, 0.7556371, 3.92702, 4.37279, 6.57951)
+projection = 1
+fov = 45.1
+size = 10.592
+script = ExtResource("1_rcd4o")
