@@ -1,12 +1,14 @@
 using Godot;
 using System;
 
+
 public partial class BasicPlayerBody : CharacterBody3D
 {
+	[Export] public Camera3D Camera;
+	
 	public const float Speed = 5.0f;
 	public const float JumpVelocity = 4.5f;
 	
-	private Camera3D _camera;
 	private const int RayLength = 200;
 
 	// runs every frame
@@ -29,7 +31,15 @@ public partial class BasicPlayerBody : CharacterBody3D
 		// Get the input direction and handle the movement/deceleration.
 		// As good practice, you should replace UI actions with custom gameplay actions. -- Already done
 		Vector2 inputDir = Input.GetVector("move_left", "move_right", "move_up", "move_down");
-		Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
+		Vector3 camForward = -Camera.Transform.Basis.Z;
+		camForward.Y = 0;
+		camForward = camForward.Normalized();
+
+		Vector3 camRight = Camera.Transform.Basis.X;
+		camRight.Y = 0;
+		camRight = camRight.Normalized();
+
+		Vector3 direction = (camRight * inputDir.X + camForward * -inputDir.Y).Normalized();
 		if (direction != Vector3.Zero)
 		{
 			velocity.X = direction.X * Speed;
@@ -53,13 +63,13 @@ public partial class BasicPlayerBody : CharacterBody3D
 
 	public override void _Ready() // Basically like a constructor for nodes when they first enter the scene before anything else happens
 	{
-		_camera = GetNode<Camera3D>("/root/Main_world/main_player_cam/CameraPivot/Camera3D");
+		
 	}
 
 	private void HandleRotation()
 	{
-		var from = _camera.ProjectRayOrigin(GetViewport().GetMousePosition());
-		var normal = _camera.ProjectRayNormal(GetViewport().GetMousePosition());
+		var from = Camera.ProjectRayOrigin(GetViewport().GetMousePosition());
+		var normal = Camera.ProjectRayNormal(GetViewport().GetMousePosition());
 		
 		var t = -from.Y /  normal.Y;
 		Vector3 groundPoint = from + normal * t;

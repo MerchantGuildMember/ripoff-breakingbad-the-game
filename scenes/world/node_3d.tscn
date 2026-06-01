@@ -13,12 +13,14 @@
 
 [node name="WorldEnvironment" parent="." instance=ExtResource("3_yjakr")]
 
-[node name="BasicPlayerBody" parent="." instance=ExtResource("1_gl1gs")]
+[node name="BasicPlayerBody" parent="." node_paths=PackedStringArray("Camera") instance=ExtResource("1_gl1gs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.26846, 0)
+Camera = NodePath("../Camera3D")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("Player")]
 transform = Transform3D(0.859252, -0.236191, 0.453762, -0.00716741, 0.881383, 0.472348, -0.511503, -0.409118, 0.755637, 3.92702, 4.37279, 6.57951)
 projection = 1
 fov = 45.1
 size = 10.592
 script = ExtResource("4_jimyf")
+Player = NodePath("../BasicPlayerBody")
