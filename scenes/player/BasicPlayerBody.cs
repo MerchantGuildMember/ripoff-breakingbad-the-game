@@ -53,7 +53,7 @@ public partial class BasicPlayerBody : CharacterBody3D
 
 	public override void _Ready() // Basically like a constructor for nodes when they first enter the scene before anything else happens
 	{
-		_camera = GetNode<Camera3D>("/root/Node3D/Camera3D");
+		_camera = GetNode<Camera3D>("/root/Main_world/main_player_cam/CameraPivot/Camera3D");
 	}
 
 	private void HandleRotation()

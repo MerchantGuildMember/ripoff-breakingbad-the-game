@@ -8,7 +8,7 @@ public partial class CameraController : Camera3D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		_player = GetNode<CharacterBody3D>("/root/Node3D/BasicPlayerBody");
+		_player = GetNode<CharacterBody3D>("/root/Main_world/main_player_character/BasicPlayerBody");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
